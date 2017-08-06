@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <title><h:outputText value="#{msg.titulo}" /></title>
+        <script name="jquery/jquery.js" library="primefaces"></script>
+
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton action="#{matriculaBean.changeLanguage('')}"  value="English" image="resources/eeuu.png" style="width:35px;height:23px"/>
+            <h:commandButton action="#{matriculaBean.changeLanguage('es')}" value="Español" image="resources/spain.png" style="width:35px;height:23px"/>
+            <h:commandButton action="#{matriculaBean.changeLanguage('de')}" value="Deutschland" image="resources/aleman.png" style="width:35px;height:23px"/>
+        </h:form>
+
+
+        <h:form prependId="false" enctype="multipart/form-data">
+
+            <h1>
+                <h:outputText value="#{msg['titulo']}" />
+            </h1>
+            <h:panelGrid columns="3">
+
+                <p:outputLabel value="#{msg.id_estudiante}" for="id_estudiante" />
+                <p:inputText id="id_estudiante" label="#{msg.id_estudiante}" value="#{matriculaBean.id_estudiante}" required="true" placeholder="#{msg.id_estudiante}">
+                    <f:attribute name="requiredMessage" value="#{msg.id_estudiante_req}" />
+                    <f:validateLength minimum="7" maximum="12" />                    
+                </p:inputText>
+                <p:message for="id_estudiante" styleClass="errormsg" />
+
+                <p:outputLabel value="#{msg.tipo_id}" for="tipo_id"  />
+                <p:selectOneMenu id="tipo_id" value="#{matriculaBean.tipo_id}" style="width:150px" >
+                    <f:selectItem itemLabel="#{msg.seleccionar_tipo_id}" itemValue="" noSelectionOption="true" />
+                    <f:selectItem itemLabel="#{msg.cedula_ciudadania}" itemValue="Cedula de ciudadania" />
+                    <f:selectItem itemLabel="#{msg.tarjeta_identidad}" itemValue="Tarjeta de identidad" />
+                    <f:selectItem itemLabel="#{msg.cedula_extranjera}" itemValue="Cedula extranjera" />
+                </p:selectOneMenu>
+                <p:message for="tipo_id" styleClass="errormsg" />
+
+                <p:outputLabel value="#{msg.nombre}" for="nombre" />
+                <p:inputText id="nombre" label="#{msg.nombre}" value="#{matriculaBean.nombre}" placeholder="#{msg.nombre}" required="true" >
+                    <f:validateLength maximum="30" />
+                    <f:attribute name="requiredMessage" value="#{msg.nombre_req}" />
+                </p:inputText>
+
+               
+                <p:outputLabel value="#{msg.email}" for="email" />
+                <p:inputText id="email" label="#{msg.email}" value="#{matriculaBean.email}" placeholder="#{msg.email}" required="true" validatorMessage="#{correo_invalido}" >
+                    <f:attribute name="requiredMessage" value="#{msg.email_req}" />
+                    <f:validateRegex
+                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                </p:inputText>
+
+                <p:outputLabel value="#{msg.materias}" for="materiasArreglo" />
+                <p:selectManyCheckbox id="materiasArreglo" value="#{matriculaBean.materiasArreglo}" >
+                    <f:selectItem itemLabel="#{msg.basesdatos}" itemValue="Bases de datos" />
+                    <f:selectItem itemLabel="#{msg.arquitecturasoftware}" itemValue="Arquitectura de software" />
+                    <f:selectItem itemLabel="#{msg.arquitecturacomputadores}" itemValue="Arquitectura de computadores" />
+                    <f:selectItem itemLabel="#{msg.sistemasoperativos}" itemValue="Sistemas operativos" />
+                </p:selectManyCheckbox>
+                
+                <p:fileUpload value="#{matriculaBean.file}" mode="simple" skinSimple="true"/>
+
+                <p:messages id="msg"/>
+                <p:captcha id="captcha"></p:captcha>
+
+                <br/>
+                <p:commandButton value="Check" actionListener="#{captcha.check}" ajax="false"></p:commandButton>
+                <p:commandButton id="x"  value="#{msg.enviar}" actionListener="#{matriculaBean.guardar()}" action="submit" update="@form:x" />
+
+
+            </h:panelGrid>
+            <br/>
+
+
+        </h:form>
+
+    </h:body>
+</html>
+

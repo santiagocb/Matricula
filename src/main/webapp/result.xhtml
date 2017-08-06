@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <link href="styles.css" rel="stylesheet" type="text/css" />
+        <title><h:outputText value="#{msg.titulo}" /></title>
+
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1>
+                <h:outputText value="#{msg.info_mat}" />
+            </h1>
+
+            <h:panelGrid columns="2">
+                <h:outputText value="#{msg.nombre}" />
+                <h:outputText value="#{matriculaBean.nombre}"/>
+
+                <h:outputText value="#{msg.tipo_id}" />
+                <h:outputText value="#{matriculaBean.tipo_id}"/>
+
+                <h:outputText value="#{msg.id_estudiante}" />
+                <h:outputText value="#{matriculaBean.id_estudiante}"/>
+
+                <h:outputText value="#{msg.email}" />
+                <h:outputText value="#{matriculaBean.email}"/>
+
+                <h:outputText value="#{msg.materias}" />
+                <h:outputText value="#{matriculaBean.materias}"/>
+
+                <h:outputText value="#{msg.imagen}" />
+                <img src="/Matricula/images/#{matriculaBean.id_estudiante}" style="width:200px;width:500px" ></img>
+                
+                <p:column headerText="Qr Code">
+                    <p:barcode value="#{matriculaBean.nombre} #{matriculaBean.tipo_id} #{matriculaBean.id_estudiante} #{matriculaBean.email} #{matriculaBean.materias}" type="qr" />
+                </p:column>
+
+            </h:panelGrid>
+            <h:commandButton value="#{msg.regresar}" action="back" />
+        </h:form>
+
+    </h:body></html>

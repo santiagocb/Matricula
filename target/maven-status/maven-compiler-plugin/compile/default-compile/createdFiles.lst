@@ -1,0 +1,8 @@
+com/udea/modelo/Matricula.class
+com/udea/logica/AbstractFacade.class
+com/udea/logica/MatriculaFacadeLocal.class
+com/udea/logica/MatriculaFacade.class
+com/udea/controlador/MatriculaBean.class
+com/udea/controlador/ImageBean.class
+com/udea/controlador/Captcha.class
+com/udea/modelo/Matricula_.class
